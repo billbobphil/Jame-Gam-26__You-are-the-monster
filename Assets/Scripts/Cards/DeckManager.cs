@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Cards
 {
-    public class DeckManager : MonoBehaviour
+    public class DeckManager
     {
         private List<Card> _deck = new();
         private Stack<Card> _workingDeck = new();
