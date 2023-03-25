@@ -1,52 +1,77 @@
+using AI;
 using UnityEngine;
 
 namespace GameLogic
 {
     public class MatchManager : MonoBehaviour
     {
+        public delegate void EndMatch(bool didPlayerWin);
+        public static event EndMatch OnMatchEnd;
+        
         public ReferencePig referencePig;
-        public int numberOfRoundsTranspired;
-        public void RunMatch()
+        public int currentRound;
+        private Opponent _aiOpponent;
+        private Player _player;
+        
+        private void OnEnable()
         {
-            InitializeMatch();
-            
-            bool playerWinConditionMet = false;
-            bool opponentWinConditionMet = false;
-            
-            while (!playerWinConditionMet && !opponentWinConditionMet)
-            {
-                numberOfRoundsTranspired++;
-                referencePig.roundManager.RunRound();
-                
-                playerWinConditionMet = DidPlayerWin();
-                opponentWinConditionMet = DidOpponentWin();
-            }
-            
-            EndMatch();
+            RoundManager.OnRoundEnd += HandleRoundEnd;
+        }
+        
+        private void OnDisable()
+        {
+            RoundManager.OnRoundEnd -= HandleRoundEnd;
+        }
+        
+        public void RunMatch(Opponent opponent)
+        {
+            InitializeMatch(opponent);
+            currentRound++;
+            referencePig.roundManager.RunRound(_aiOpponent);
         }
 
-        private void InitializeMatch()
+        private void InitializeMatch(Opponent opponent)
         {
-            numberOfRoundsTranspired = 0;
-            //Get an AI opponent
-            //Get a player
-            //Shuffle both decks
+            currentRound = 0;
+            
+            //Get opponent & player
+            _aiOpponent = opponent;
+            _player = referencePig.player;
+
+            //Build decks
+            _player.deckManager.InitializeDeck();
+            _aiOpponent.deckManager.InitializeDeck();
+            
+            //Shuffle decks
+            _player.deckManager.ShuffleDeck();
+            _aiOpponent.deckManager.ShuffleDeck();
+            
             //Draw starting hands
+            _player.handManager.DrawStartingHand();
+            _aiOpponent.handManager.DrawStartingHand();
         }
 
-        private void EndMatch()
+        private void HandleRoundEnd()
         {
-            
+            if (DidOpponentWin() || DidPlayerWin())
+            {
+                OnMatchEnd?.Invoke(DidPlayerWin());
+            }
+            else
+            {
+                currentRound++;
+                referencePig.roundManager.RunRound(_aiOpponent);
+            }
         }
 
         private bool DidPlayerWin()
         {
-            return false;
+            return _aiOpponent.IsDead();
         }
         
         private bool DidOpponentWin()
         {
-            return false;
+            return _player.IsDead();
         }
     }
 }

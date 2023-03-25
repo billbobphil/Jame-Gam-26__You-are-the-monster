@@ -3,9 +3,28 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class Player : MonoBehaviour
+    public class Player : CardUser
     {
-        public DeckManager DeckManager = new DeckManager();
-        
+        public int baseHealth = 30;
+        public int currentHealth;
+
+        private void Awake()
+        {
+            currentHealth = baseHealth;
+        }
+
+        public void TakeDamage(int amount)
+        {
+            currentHealth -= amount;
+            if (currentHealth < 0)
+            {
+                currentHealth = 0;
+            }
+        }
+
+        public bool IsDead()
+        {
+            return currentHealth <= 0;
+        }
     }
 }

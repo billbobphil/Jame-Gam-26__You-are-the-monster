@@ -4,64 +4,62 @@ using UnityEngine;
 
 namespace Cards
 {
-    public class DeckManager
+    public class DeckManager : MonoBehaviour
     {
-        private List<Card> _deck = new();
-        private Stack<Card> _workingDeck = new();
+        [SerializeField]
+        private List<Card> deckComposition;
+        [SerializeField]
+        private Deck workingDeck;
+        public Transform deckLocation;
+        public DiscardPile discardPile;
 
         public Card DrawFromDeck()
         {
-            if (_workingDeck.Count == 0)
-            {
-                throw new EmptyDeckException();
-            }
-            
-            return _workingDeck.Pop();
+            return workingDeck.DrawFromDeck();
         }
 
         public void ShuffleDeck()
         {
-            Stack<Card> tempDeck = new();
-            List<Card> currentDeck = new(_workingDeck);
-            
-            while (currentDeck.Count > 0)
-            {
-                int randomIndex = Random.Range(0, currentDeck.Count);
-                tempDeck.Push(currentDeck[randomIndex]);
-                currentDeck.RemoveAt(randomIndex);
-            }
+            workingDeck.ShuffleDeck();
+        }
 
-            _workingDeck = tempDeck;
+        public void InitializeDeck()
+        {
+            ResetDeck();
         }
 
         public void ResetDeck()
         {
-            _workingDeck = new Stack<Card>(_deck);
+            foreach (Card card in deckComposition)
+            {
+                Card createdCard = Instantiate(card, deckLocation.position, Quaternion.identity);
+                createdCard.discardPile = discardPile;
+                workingDeck.Cards.Push(createdCard);
+            }
+            
             ShuffleDeck();
         }
         
         public void AddToWorkingDeck(Card card)
         {
-            _workingDeck.Push(card);
+            workingDeck.AddCard(card);
             ShuffleDeck();
         }
         
         public void RemoveFromWorkingDeck(Card card)
         {
-            List<Card> currentDeck = new(_workingDeck);
-            currentDeck.Remove(card);
-            _workingDeck = new Stack<Card>(currentDeck);
+            workingDeck.RemoveCard(card);
             ShuffleDeck();
         }
 
-        public void AddToDeckPermanently(Card card)
+        public void AddToDeckComposition(Card card)
         {
-            _deck.Add(card);
+            deckComposition.Add(card);
         }
         
-        public void RemoveFromDeckPermanently(Card card)
+        public void RemoveFromDeckComposition(Card card)
         {
-            _deck.Remove(card);
+            deckComposition.Remove(card);
         }
     }
 }

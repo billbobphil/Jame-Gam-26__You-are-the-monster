@@ -1,7 +1,8 @@
 ﻿namespace Cards
 {
-    public abstract class ModifierCard : Card
+    public abstract class ModifierCard : PlayerCard
     {
-        public ModifierTypes modifierType;
+        public MonsterTypes modifierType;
+        public int modifierAmount;
     }
 }

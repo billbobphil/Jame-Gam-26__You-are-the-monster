@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2395246741126665892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2395246741126665886}
+  - component: {fileID: 2395246741126665888}
+  - component: {fileID: 2395246741126665891}
+  - component: {fileID: 2395246741126665893}
+  - component: {fileID: 2395246741126665887}
+  m_Layer: 0
+  m_Name: Overseer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2395246741126665886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395246741126665892}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.93995667, y: -1.0123622, z: -0.046888493}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2395246741126665888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395246741126665892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb1bf5dfff29af408d154082d959f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referencePig: {fileID: 2395246741126665893}
+  currentRound: 0
+--- !u!114 &2395246741126665891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395246741126665892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8576cba34bfe6ae46b2f7282029d28e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referencePig: {fileID: 2395246741126665893}
+  playerSelectedCards: []
+  aiSelectedCards: []
+--- !u!114 &2395246741126665893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395246741126665892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f396fb1eb273aed4a81183335b98e0b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  matchManager: {fileID: 2395246741126665888}
+  roundManager: {fileID: 2395246741126665891}
+--- !u!114 &2395246741126665887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395246741126665892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926810eec74347f3bdd931a05af7e94d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referencePig: {fileID: 2395246741126665893}
+  startingPlayerCards:
+  - {fileID: 6479345088582113953, guid: a6be4f8c37e93284bb85dbfd2d2351e4, type: 3}
+  - {fileID: 6479345088582113953, guid: a6be4f8c37e93284bb85dbfd2d2351e4, type: 3}
+  - {fileID: 6479345088582113953, guid: a6be4f8c37e93284bb85dbfd2d2351e4, type: 3}
+  - {fileID: 6479345088582113953, guid: a6be4f8c37e93284bb85dbfd2d2351e4, type: 3}
+  - {fileID: 6479345088582113953, guid: a6be4f8c37e93284bb85dbfd2d2351e4, type: 3}
+  opponents:
+  - {fileID: 7060236563003008625, guid: 57c7b9052098ef849956b8566f1ba86c, type: 3}
+  currentLevel: 0
