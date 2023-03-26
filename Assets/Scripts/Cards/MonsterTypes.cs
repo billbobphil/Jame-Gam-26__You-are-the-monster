@@ -2,6 +2,7 @@
 {
     public enum MonsterTypes
     {
+        NONE,
         VAMPIRE,
         WEREWOLF,
         ZOMBIE,

@@ -44,13 +44,11 @@ namespace GameLogic
 
         private void HandleMatchEnd(bool didPlayerWin)
         {
-            //TODO: will need to adjust to accept a boolean stating who won the match
-            
             Debug.Log("Match concluded.");
             Debug.Log($"Did player win? : {didPlayerWin}");
             //TODO: if player won then need to give health back
             //TODO: if ai won then need to end game
-            //start logic to go to next level
+            //TODO: start logic to go to next level
         }
     }
 }

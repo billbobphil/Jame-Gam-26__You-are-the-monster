@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AI;
 using Cards;
+using Exceptions;
 using UnityEngine;
 
 namespace GameLogic
@@ -12,10 +13,11 @@ namespace GameLogic
         public static event EndRound OnRoundEnd;
 
         public ReferencePig referencePig;
-        private Opponent aiOpponent;
-        private Player player;
+        private Opponent _aiOpponent;
+        private Player _player;
         public List<Card> playerSelectedCards;
         public List<Card> aiSelectedCards;
+        public bool isPlayerSelectingCards;
 
         private void OnEnable()
         {
@@ -31,63 +33,90 @@ namespace GameLogic
         
         public void ResetRound()
         {
-            player = null;
-            aiOpponent = null;
+            _player = null;
+            _aiOpponent = null;
         }
         public void RunRound(Opponent opponent)
         {
-            aiOpponent = opponent;
-            player = referencePig.player;
+            _aiOpponent = opponent;
+            _player = referencePig.player;
+            isPlayerSelectingCards = true;
             Debug.Log("Running round");
-            
-            //DONE: player and Ai both draw
-            PlayerDraw();
-            AiDraw();
-                //possible condition for empty decks
-                
-            //DONE: Generate AI intention and show to player
-            GenerateAiIntention();
 
-            //DONE: Player chooses cards to play - this will need to run in an update loop
-                //DONE: limit one monster type card
-                //DONE: unlimited non-monster type cards
-                
-            //DONE: (need button still)Player 'submits' turn - will be triggered by button or something?
-                //DONE: Player cards must be removed from hand and added to discard
-                //DONE: AI cards must be removed from hand and added to discard
-                //Forces battle
-                        //1/2 DONE: (need to calculate AI) Check power conditions
-                            //if player loses, player takes damage equal to total power of AI
-                            //if AI loses, AI takes a 'wound' of which they can take 3
+            bool shouldRoundContinue = HandleDrawPhase();
+            
+            if (shouldRoundContinue)
+            {
+                GenerateAiIntention();
+            }
+        }
+
+        private bool HandleDrawPhase()
+        {
+            bool playerDeckEmpty = false;
+            bool aiDeckEmpty = false;
+            try
+            {
+                PlayerDraw();
+            }
+            catch (EmptyDeckException)
+            {
+                playerDeckEmpty = true;
+            }
+
+            try
+            {
+                AiDraw();
+            }
+            catch (EmptyDeckException)
+            {
+                aiDeckEmpty = true;
+            }
+
+            if (playerDeckEmpty && aiDeckEmpty)
+            {
+                if (_player.handManager.hand.Count == 0 && _aiOpponent.handManager.hand.Count == 0)
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        _aiOpponent.Wound();
+                    }
+                    OnRoundEnd?.Invoke();
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void PlayerDraw()
         {
-            player.handManager.DrawCard();
+            _player.handManager.DrawCard();
         }
 
         private void AiDraw()
         {   
-            aiOpponent.handManager.DrawCard();
+            _aiOpponent.handManager.DrawCard();
         }
         
         private void GenerateAiIntention()
         {
             //generate a number between 0 and the number of cards in the AI's hand
-            int randomIndex = UnityEngine.Random.Range(0, aiOpponent.handManager.hand.Count);
+            int randomIndex = UnityEngine.Random.Range(0, _aiOpponent.handManager.hand.Count);
             
             //get the card at that index
-            Card card = aiOpponent.handManager.hand[randomIndex];
+            Card card = _aiOpponent.handManager.hand[randomIndex];
             
             //add the card to the list of cards the AI has selected
             aiSelectedCards.Add(card);
-            card.transform.position = aiOpponent.intentionLocation.position;
+            card.transform.position = _aiOpponent.intentionLocation.position;
         }
 
         public void OnPlayerSubmitTurn()
         {
+            //TODO: Something to prevent player from select cards during this time - needs to be tied in to interface
+            isPlayerSelectingCards = false;
             Debug.Log("Player submitted turn");
-            //TODO: Something to prevent player from select cards during this time
             int numberOfMonsterCards = 0;
 
             // ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
@@ -99,68 +128,118 @@ namespace GameLogic
                 }
             }
 
-            if (numberOfMonsterCards > 1)
+            if (IsPlayerSubmissionValid())
             {
-                //TODO: prevent player from submitting turn and force them to retract cards
-                Debug.Log("Cannot choose more than 1 monster card");
-            }
-            else
-            {
-                //Calculate player power
-                MonsterCard monsterCard = null;
-                List<ModifierCard> modifierCards = new();
-
-                foreach (Card card in playerSelectedCards)
-                {
-                    if (card is MonsterCard)
-                    {
-                        monsterCard = (MonsterCard)card;
-                    }
-                    else
-                    {
-                        modifierCards.Add((ModifierCard)card);
-                    }
-                }
-
-                int calculatedPower = monsterCard!.basePower;
-
-                foreach (ModifierCard card in modifierCards)
-                {
-                    if (card.modifierType == monsterCard.monsterType)
-                    {
-                        calculatedPower += card.modifierAmount;
-                    }
-                }
+                int playerPower = CalculatePlayerPower();
+                int aiPower = CalculateAiPower(GetPlayerMonsterCard());
                 
                 foreach(Card card in playerSelectedCards)
                 {
-                    player.handManager.PlayCard(card);
+                    _player.handManager.PlayCard(card);
                 }
                 
                 foreach(Card card in aiSelectedCards)
                 {
-                    aiOpponent.handManager.PlayCard(card);
+                    _aiOpponent.handManager.PlayCard(card);
                 }
                 
-                Debug.Log($"Player power is: {calculatedPower}");
-                Debug.Log($"AI power is: N/A");
+                Debug.Log($"Player power is: {playerPower}");
+                Debug.Log($"AI power is: {aiPower}");
 
                 playerSelectedCards = new List<Card>();
                 aiSelectedCards = new List<Card>();
                 
-                RunBattle(calculatedPower, 0);
+                RunBattle(playerPower, aiPower);
+            }
+            else
+            {
+                //TODO: prevent player from submitting turn and force them to retract cards - needs interface
+                Debug.Log("Cannot choose more than 1 monster card");
             }
         }
 
-        public void HandlePlayerCardSubmitted(PlayerCard card)
+        private bool IsPlayerSubmissionValid()
         {
-            Debug.Log("Player submitted card");
+            int numberOfMonsterCards = 0;
+
+            // ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
+            foreach (PlayerCard card in playerSelectedCards)
+            {
+                if (card is MonsterCard)
+                {
+                    numberOfMonsterCards++;
+                }
+            }
+            
+            return numberOfMonsterCards <= 1;
+        }
+
+        private int CalculatePlayerPower()
+        {
+            MonsterCard monsterCard = GetPlayerMonsterCard();
+            List<ModifierCard> modifierCards = GetPlayerModifierCards();
+
+            int calculatedPower = monsterCard!.basePower;
+
+            foreach (ModifierCard card in modifierCards)
+            {
+                if (card.modifierType == monsterCard.monsterType)
+                {
+                    calculatedPower += card.modifierAmount;
+                }
+            }
+
+            return calculatedPower;
+        }
+
+        private int CalculateAiPower(MonsterCard playerMonsterCard)
+        {
+            HeroCard aiCard = aiSelectedCards[0] as HeroCard;
+            int calculatedPower = aiCard!.basePower;
+
+            if (aiCard != null && aiCard.strongAgainst == playerMonsterCard.monsterType)
+            {
+                calculatedPower *= aiCard.strongAgainstMultiplier;
+            }
+
+            return calculatedPower;
+        }
+        
+        private MonsterCard GetPlayerMonsterCard()
+        {
+            MonsterCard monsterCard = null;
+            foreach (Card card in playerSelectedCards)
+            {
+                if (card is MonsterCard)
+                {
+                    monsterCard = (MonsterCard)card;
+                }
+            }
+
+            return monsterCard;
+        }
+        
+        private List<ModifierCard> GetPlayerModifierCards()
+        {
+            List<ModifierCard> modifierCards = new();
+            foreach (Card card in playerSelectedCards)
+            {
+                if (card is ModifierCard)
+                {
+                    modifierCards.Add((ModifierCard)card);
+                }
+            }
+
+            return modifierCards;
+        }
+        
+        private void HandlePlayerCardSubmitted(PlayerCard card)
+        {
             playerSelectedCards.Add(card);
         }
         
-        public void HandlePlayerCardRetracted(PlayerCard card)
+        private void HandlePlayerCardRetracted(PlayerCard card)
         {
-            Debug.Log("Player retracted card");
             playerSelectedCards.Remove(card);
         }
 
@@ -175,12 +254,12 @@ namespace GameLogic
             if(playerPower > aiPower)
             {
                 Debug.Log("Player wins round");
-                aiOpponent.Wound();
+                _aiOpponent.Wound();
             }
             else
             {
                 Debug.Log("AI wins round");
-                player.TakeDamage(aiPower);
+                _player.TakeDamage(aiPower);
             }
         }
     }

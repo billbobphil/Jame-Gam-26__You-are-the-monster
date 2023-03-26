@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6697181824330255486
+--- !u!1001 &2501937831648162812
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,19 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 57218272457025673, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_Name
-      value: Vampire
+      value: MonsterBase
       objectReference: {fileID: 0}
     - target: {fileID: 4211182174537521671, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_Color.b
-      value: 0.35826805
+      value: 0.16981131
       objectReference: {fileID: 0}
     - target: {fileID: 4211182174537521671, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_Color.g
-      value: 0.35826805
+      value: 0.16981131
       objectReference: {fileID: 0}
     - target: {fileID: 4211182174537521671, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_Color.r
-      value: 0.9150943
+      value: 0.16981131
       objectReference: {fileID: 0}
     - target: {fileID: 4579403467455269555, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_RootOrder
@@ -69,25 +69,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
---- !u!1 &6645743866099934455 stripped
+--- !u!1 &2482587873657330549 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 57218272457025673, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
-  m_PrefabInstance: {fileID: 6697181824330255486}
+  m_PrefabInstance: {fileID: 2501937831648162812}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6479345088582113953
+--- !u!114 &-2531536544952144116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6645743866099934455}
+  m_GameObject: {fileID: 2482587873657330549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b0fed36821431d837f9f983a3ce3e2, type: 3}
+  m_Script: {fileID: 11500000, guid: a763149e1e9d4348805096ff584961d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCost: 5
-  cardName: Vampire
-  discardManager: {fileID: 0}
-  basePower: 2
+  baseCost: 0
+  cardName: 
+  discardPile: {fileID: 0}
+  isDiscarded: 0
+  hand: {fileID: 0}
+  basePower: 0
   monsterType: 0

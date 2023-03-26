@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5511906761480280275
+--- !u!1001 &3762318697750716126
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,19 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 57218272457025673, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_Name
-      value: TestCard
+      value: HeroBase
       objectReference: {fileID: 0}
     - target: {fileID: 4211182174537521671, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.9528302
       objectReference: {fileID: 0}
     - target: {fileID: 4211182174537521671, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_Color.g
-      value: 0.8201977
+      value: 0.8501053
       objectReference: {fileID: 0}
     - target: {fileID: 4211182174537521671, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_Color.r
-      value: 0.4669811
+      value: 0.32809716
       objectReference: {fileID: 0}
     - target: {fileID: 4579403467455269555, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
       propertyPath: m_RootOrder
@@ -69,24 +69,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
---- !u!1 &5527462966400479322 stripped
+--- !u!1 &3818268923922200151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 57218272457025673, guid: 290ee61c1e5d37847b1ef3568bfed32f, type: 3}
-  m_PrefabInstance: {fileID: 5511906761480280275}
+  m_PrefabInstance: {fileID: 3762318697750716126}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-3548928521397664271
+--- !u!114 &-2744595581711521321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5527462966400479322}
+  m_GameObject: {fileID: 3818268923922200151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bfb388c09cb4745857206848d53d96f, type: 3}
+  m_Script: {fileID: 11500000, guid: a07534ad9ff4439ca6619303967f7b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCost: 1
-  cardName: Test Card
+  baseCost: 0
+  cardName: 
   discardPile: {fileID: 0}
-  basePower: 1
+  isDiscarded: 0
+  basePower: 0
+  strongAgainst: 0
+  strongAgainstMultiplier: 0

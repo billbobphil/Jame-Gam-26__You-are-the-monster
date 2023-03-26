@@ -16,6 +16,14 @@ namespace Cards
         private bool _isPreSubmitted;
         private const float DistanceToExtractCard = 7.6f;
         private bool _hasBeenTouched;
+        public int baseCost;
+
+        
+        public override void Play()
+        {
+            base.Play();
+            //TODO: remove baseCost from health!
+        }
 
         private void OnMouseEnter()
         {

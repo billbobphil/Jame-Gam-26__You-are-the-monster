@@ -34,19 +34,15 @@ namespace GameLogic
         {
             currentRound = 0;
             
-            //Get opponent & player
             _aiOpponent = opponent;
             _player = referencePig.player;
 
-            //Build decks
             _player.deckManager.InitializeDeck();
             _aiOpponent.deckManager.InitializeDeck();
             
-            //Shuffle decks
             _player.deckManager.ShuffleDeck();
             _aiOpponent.deckManager.ShuffleDeck();
             
-            //Draw starting hands
             _player.handManager.DrawStartingHand();
             _aiOpponent.handManager.DrawStartingHand();
         }

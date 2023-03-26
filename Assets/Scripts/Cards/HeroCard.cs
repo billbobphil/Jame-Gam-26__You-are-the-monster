@@ -1,7 +1,9 @@
 ﻿namespace Cards
 {
-    public abstract class HeroCard : AiCard
+    public class HeroCard : AiCard
     {
         public int basePower;
+        public MonsterTypes strongAgainst;
+        public int strongAgainstMultiplier;
     }
 }
