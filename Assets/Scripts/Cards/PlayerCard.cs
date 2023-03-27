@@ -1,4 +1,5 @@
 ﻿using System;
+using GameLogic;
 using UnityEngine;
 
 namespace Cards
@@ -18,7 +19,16 @@ namespace Cards
         private bool _hasBeenTouched;
         public int baseCost;
 
-        
+        private void OnEnable()
+        {
+            RoundManager.OnRoundEnd += ResetCard;
+        }
+
+        private void OnDisable()
+        {
+            RoundManager.OnRoundEnd -= ResetCard;
+        }
+
         public override void Play()
         {
             base.Play();
@@ -60,6 +70,11 @@ namespace Cards
                 _isPreSubmitted = true;
                 OnPlayerCardSubmitted?.Invoke(this);
             }
+        }
+        
+        private void ResetCard()
+        {
+            _hasBeenTouched = false;
         }
     }
 }

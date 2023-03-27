@@ -457,6 +457,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9040764677219150400, guid: 5ed3db89ba3e39647b4ea0430649fdf6, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040764677219150400, guid: 5ed3db89ba3e39647b4ea0430649fdf6, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 965d0550354336e4dbdc4969b900d9ce, type: 2}
+    - target: {fileID: 9040764677219150400, guid: 5ed3db89ba3e39647b4ea0430649fdf6, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040764677219150400, guid: 5ed3db89ba3e39647b4ea0430649fdf6, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1262042659069850149, guid: 965d0550354336e4dbdc4969b900d9ce, type: 2}
     - target: {fileID: 9040764677551335457, guid: 5ed3db89ba3e39647b4ea0430649fdf6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
