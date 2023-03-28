@@ -12,7 +12,6 @@ namespace Cards
         public delegate void PlayerCardRetracted(PlayerCard card);
         public static event PlayerCardRetracted OnPlayerCardRetracted;
 
-        public Player player;
         private Vector3 _inHandPosition;
         public HandManager hand;
         private bool _isPreSubmitted;
@@ -21,12 +20,8 @@ namespace Cards
         public int baseCost;
         public AudioSource cardChooseAudioSource;
         public AudioSource cardHoverAudioSource;
+        public bool isDisabled;
 
-        private void Start()
-        {
-            player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        }
-        
         private void OnEnable()
         {
             RoundManager.OnRoundEnd += ResetCard;
@@ -37,14 +32,10 @@ namespace Cards
             RoundManager.OnRoundEnd -= ResetCard;
         }
 
-        public override void Play()
-        {
-            base.Play();
-            player.TakeDamage(baseCost, false);
-        }
-
         private void OnMouseEnter()
         {
+            if (isDisabled) return;
+            
             if (!_hasBeenTouched)
             {
                 _inHandPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -58,6 +49,8 @@ namespace Cards
 
         private void OnMouseExit()
         {
+            if (isDisabled) return;
+            
             if (!isDiscarded && !_isPreSubmitted)
             {
                 transform.position = _inHandPosition;    
@@ -70,6 +63,7 @@ namespace Cards
 
         private void OnMouseDown()
         {
+            if (isDisabled) return;
             cardChooseAudioSource.Play();
             
             if (_isPreSubmitted)

@@ -2,19 +2,36 @@
 using AI;
 using Cards;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameLogic
 {
     public class GameManager : MonoBehaviour
     {
         public ReferencePig referencePig;
-        public List<Card> startingPlayerCards = new();
+        public static List<Card> PlayerDeckComposition = new();
+        public List<Card> startingDeck;
         public List<Opponent> opponents = new();
-        public int currentLevel = 0;
+        public static int CurrentLevel = -1;
         
         private void Awake()
         {
-            CreateStartingDeck();
+            CurrentLevel++;
+            referencePig.levelText.text = $"{CurrentLevel + 1}";
+            
+            if (CurrentLevel == 0)
+            {
+                foreach (Card card in startingDeck)
+                {
+                    PlayerDeckComposition.Add(card);
+                }
+            }
+            
+            CreateDeck();
+            referencePig.damageTakenText.text = "";
+            referencePig.opponentDamageText.text = "";
+            referencePig.victoryPanel.SetActive(false);
+            referencePig.defeatPanel.SetActive(false);
         }
 
         private void OnEnable()
@@ -30,13 +47,13 @@ namespace GameLogic
         private void Start()
         {
             //TODO: should probably be moved to a call that happens on some sort of button click?
-            Opponent opponent = Instantiate(opponents[currentLevel], new Vector3(0, 0, 0), Quaternion.identity);
+            Opponent opponent = Instantiate(opponents[CurrentLevel], new Vector3(0, 0, 0), Quaternion.identity);
             referencePig.matchManager.RunMatch(opponent);
         }
 
-        private void CreateStartingDeck()
+        private void CreateDeck()
         {
-            foreach (Card card in startingPlayerCards)
+            foreach (Card card in PlayerDeckComposition)
             {
                 referencePig.player.deckManager.AddToDeckComposition(card);
             }
@@ -46,9 +63,27 @@ namespace GameLogic
         {
             Debug.Log("Match concluded.");
             Debug.Log($"Did player win? : {didPlayerWin}");
-            //TODO: if player won then need to give health back
-            //TODO: if ai won then need to end game
-            //TODO: start logic to go to next level
+            
+            if (didPlayerWin)
+            {
+                Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+                player.Heal(player.usedHealthAsMana);
+                referencePig.victoryPanel.SetActive(true);
+            }
+            else
+            {
+                referencePig.defeatPanel.SetActive(true);
+            }
+        }
+
+        public void OnClickVictory()
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        public void OnClickMenu()
+        {
+            SceneManager.LoadScene(2);
         }
     }
 }

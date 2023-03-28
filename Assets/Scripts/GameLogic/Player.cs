@@ -1,3 +1,4 @@
+using System.Collections;
 using Cards;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace GameLogic
         public int usedHealthAsMana;
         private ReferencePig _referencePig;
         public AudioSource audioSource;
+        private Color _redColor = new(152f/255f, 26f/255f, 28f/255f);
+        private Color _greenColor = new(66f/255f, 131f/255f, 40f/255f);
 
         private void Awake()
         {
@@ -37,6 +40,7 @@ namespace GameLogic
                 currentHealth = baseHealth;
             }
             UpdateHealthUi();
+            StartCoroutine(ShowDamageHealingText(amount, false));
         }
 
         public void TakeDamage(int amount, bool isFromOpponent)
@@ -54,6 +58,15 @@ namespace GameLogic
             }
             
             UpdateHealthUi();
+            UpdateBankedHealthUi();
+            if (isFromOpponent)
+            {
+                StartCoroutine(ShowOpponentDamageText(amount));
+            }
+            else
+            {
+                StartCoroutine(ShowDamageHealingText(amount, true));
+            }
         }
 
         private void UpdateHealthUi()
@@ -61,9 +74,37 @@ namespace GameLogic
             _referencePig.playerHealthText.text = currentHealth.ToString();
         }
 
+        private void UpdateBankedHealthUi()
+        {
+            _referencePig.bankedHealthText.text = $"({usedHealthAsMana})";
+        }
+
         public bool IsDead()
         {
             return currentHealth <= 0;
         }
+
+        public IEnumerator ShowDamageHealingText(int amount, bool isDamage)
+        {
+            string text = "Total Cost: ";
+            text += isDamage ? "-" : "+";
+            text += amount;
+            _referencePig.damageTakenText.text = text;
+
+            _referencePig.damageTakenText.color = isDamage ? _redColor : _greenColor;
+            
+            yield return new WaitForSeconds(2);
+            _referencePig.damageTakenText.text = "";
+        }
+        
+        public IEnumerator ShowOpponentDamageText(int amount)
+        {
+            string text = "Villager Damage: -";
+            text += amount;
+            _referencePig.opponentDamageText.text = text;
+            _referencePig.opponentDamageText.color = _redColor;
+            yield return new WaitForSeconds(2);
+            _referencePig.opponentDamageText.text = "";
+        } 
     }
 }

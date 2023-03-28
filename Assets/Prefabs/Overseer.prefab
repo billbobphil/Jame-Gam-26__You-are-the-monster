@@ -85,6 +85,13 @@ MonoBehaviour:
   heartOne: {fileID: 0}
   heartTwo: {fileID: 0}
   heartThree: {fileID: 0}
+  cardsRemainingText: {fileID: 0}
+  damageTakenText: {fileID: 0}
+  opponentDamageText: {fileID: 0}
+  bankedHealthText: {fileID: 0}
+  victoryPanel: {fileID: 0}
+  defeatPanel: {fileID: 0}
+  errorText: {fileID: 0}
 --- !u!114 &2395246741126665887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,15 +105,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referencePig: {fileID: 2395246741126665893}
-  startingPlayerCards:
-  - {fileID: 3094294877571717967, guid: a6be4f8c37e93284bb85dbfd2d2351e4, type: 3}
-  - {fileID: 5088618043492847677, guid: 32db393bdb58cb1498f6713140a6ee85, type: 3}
-  - {fileID: 3661474368440609225, guid: 3e7f0a071008b454ea26027abc0926fc, type: 3}
-  - {fileID: 6099555285450641469, guid: a6540155e14aa5c4cb03a2892b5750bd, type: 3}
+  startingDeck:
   - {fileID: 7537406156085294032, guid: 8fe69009b8fccb54e8d2ce99a14db171, type: 3}
+  - {fileID: 6099555285450641469, guid: a6540155e14aa5c4cb03a2892b5750bd, type: 3}
+  - {fileID: 3094294877571717967, guid: a6be4f8c37e93284bb85dbfd2d2351e4, type: 3}
+  - {fileID: 3661474368440609225, guid: 3e7f0a071008b454ea26027abc0926fc, type: 3}
+  - {fileID: 5088618043492847677, guid: 32db393bdb58cb1498f6713140a6ee85, type: 3}
   opponents:
   - {fileID: 7060236563003008625, guid: 57c7b9052098ef849956b8566f1ba86c, type: 3}
-  currentLevel: 0
 --- !u!82 &1791847780
 AudioSource:
   m_ObjectHideFlags: 0

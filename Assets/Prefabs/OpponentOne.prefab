@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 7065978965007480266, guid: 462e4d26727692a42a023e4086f48118, type: 3}
       propertyPath: cardsForDeckComposition.Array.data[2]
       value: 
-      objectReference: {fileID: 9063511816411829363, guid: 9526a76a5b96c544caf6e58cecb71232, type: 3}
+      objectReference: {fileID: 2396332227144161006, guid: b4ca5b2784e59744f9b48d3ba21e3d9b, type: 3}
     - target: {fileID: 7065978965007480266, guid: 462e4d26727692a42a023e4086f48118, type: 3}
       propertyPath: cardsForDeckComposition.Array.data[3]
       value: 

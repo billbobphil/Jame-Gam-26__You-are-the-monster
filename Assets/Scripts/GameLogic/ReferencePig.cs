@@ -14,5 +14,12 @@ namespace GameLogic
         public GameObject heartTwo;
         public GameObject heartThree;
         public TextMeshProUGUI cardsRemainingText;
+        public TextMeshProUGUI damageTakenText;
+        public TextMeshProUGUI opponentDamageText;
+        public TextMeshProUGUI bankedHealthText;
+        public GameObject victoryPanel;
+        public GameObject defeatPanel;
+        public GameObject errorText;
+        public TextMeshProUGUI levelText;
     }
 }

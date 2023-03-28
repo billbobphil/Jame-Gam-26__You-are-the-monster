@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using AI;
 using Cards;
 using Exceptions;
+using TMPro;
 using UnityEngine;
 
 namespace GameLogic
@@ -73,6 +75,8 @@ namespace GameLogic
                 aiDeckEmpty = true;
             }
 
+           
+
             if (playerDeckEmpty && aiDeckEmpty)
             {
                 if (_player.handManager.hand.Count == 0 && _aiOpponent.handManager.hand.Count == 0)
@@ -84,6 +88,38 @@ namespace GameLogic
                     OnRoundEnd?.Invoke();
                     return false;
                 }
+                
+                if (_player.handManager.hand.Count == 0)
+                {
+                    _player.TakeDamage(100, false);
+                    OnRoundEnd?.Invoke();
+                    return false;
+                }
+                
+                if (_aiOpponent.handManager.hand.Count == 0)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        _aiOpponent.Wound();
+                    }
+                    OnRoundEnd?.Invoke();
+                    return false;
+                }
+            }
+            else if (playerDeckEmpty && _player.handManager.hand.Count == 0)
+            {
+                _player.TakeDamage(100, false);
+                OnRoundEnd?.Invoke();
+                return false;
+            }
+            else if (aiDeckEmpty && _aiOpponent.handManager.hand.Count == 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    _aiOpponent.Wound();
+                }
+                OnRoundEnd?.Invoke();
+                return false;
             }
 
             return true;
@@ -114,10 +150,15 @@ namespace GameLogic
 
         public void OnPlayerSubmitTurn()
         {
-            //TODO: Something to prevent player from select cards during this time - needs to be tied in to interface
             isPlayerSelectingCards = false;
             Debug.Log("Player submitted turn");
             int numberOfMonsterCards = 0;
+
+            if (playerSelectedCards.Count == 0)
+            {
+                StartCoroutine(ShowPlayerErrorMessage("You must select at least 1 card."));
+                return;
+            }
 
             // ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
             foreach (PlayerCard card in playerSelectedCards)
@@ -130,6 +171,9 @@ namespace GameLogic
 
             if (IsPlayerSubmissionValid())
             {
+                int playerCost = CalculatePlayerCost();
+                _player.TakeDamage(playerCost, false);
+                
                 int playerPower = CalculatePlayerPower();
                 int aiPower = CalculateAiPower(GetPlayerMonsterCard());
                 
@@ -153,9 +197,16 @@ namespace GameLogic
             }
             else
             {
-                //TODO: prevent player from submitting turn and force them to retract cards - needs interface
-                Debug.Log("Cannot choose more than 1 monster card");
+                StartCoroutine(ShowPlayerErrorMessage("You can only choose 1 monster card."));
             }
+        }
+
+        private IEnumerator ShowPlayerErrorMessage(string message)
+        {
+            referencePig.errorText.GetComponent<TextMeshProUGUI>().text = message;
+            referencePig.errorText.SetActive(true);
+            yield return new WaitForSecondsRealtime(2);
+            referencePig.errorText.SetActive(false);
         }
 
         private bool IsPlayerSubmissionValid()
@@ -174,6 +225,17 @@ namespace GameLogic
             return numberOfMonsterCards <= 1;
         }
 
+        private int CalculatePlayerCost()
+        {
+            int totalCost = 0;
+            foreach(Card card in playerSelectedCards)
+            {
+                totalCost += ((PlayerCard)card).baseCost;
+            }
+
+            return totalCost;
+        }
+        
         private int CalculatePlayerPower()
         {
             MonsterCard monsterCard = GetPlayerMonsterCard();
