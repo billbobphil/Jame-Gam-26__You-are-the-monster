@@ -222,7 +222,7 @@ namespace GameLogic
                 }
             }
             
-            return numberOfMonsterCards <= 1;
+            return numberOfMonsterCards == 1;
         }
 
         private int CalculatePlayerCost()

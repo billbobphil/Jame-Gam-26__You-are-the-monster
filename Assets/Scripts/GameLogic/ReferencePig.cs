@@ -21,5 +21,6 @@ namespace GameLogic
         public GameObject defeatPanel;
         public GameObject errorText;
         public TextMeshProUGUI levelText;
+        public GameObject gameWinPanel;
     }
 }

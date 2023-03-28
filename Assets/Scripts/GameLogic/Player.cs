@@ -7,17 +7,12 @@ namespace GameLogic
     public class Player : CardUser
     {
         public int baseHealth = 30;
-        public int currentHealth;
+        public static int CurrentHealth = 30;
         public int usedHealthAsMana;
         private ReferencePig _referencePig;
         public AudioSource audioSource;
         private Color _redColor = new(152f/255f, 26f/255f, 28f/255f);
         private Color _greenColor = new(66f/255f, 131f/255f, 40f/255f);
-
-        private void Awake()
-        {
-            currentHealth = baseHealth;
-        }
 
         private void Start()
         {
@@ -27,17 +22,17 @@ namespace GameLogic
         
         public void ResetHealth()
         {
-            currentHealth = baseHealth;
+            CurrentHealth = baseHealth;
             usedHealthAsMana = 0;
             UpdateHealthUi();
         }
         
         public void Heal(int amount)
         {
-            currentHealth += amount;
-            if (currentHealth > baseHealth)
+            CurrentHealth += amount;
+            if (CurrentHealth > baseHealth)
             {
-                currentHealth = baseHealth;
+                CurrentHealth = baseHealth;
             }
             UpdateHealthUi();
             StartCoroutine(ShowDamageHealingText(amount, false));
@@ -51,10 +46,10 @@ namespace GameLogic
                 usedHealthAsMana += amount;
             }
             
-            currentHealth -= amount;
-            if (currentHealth < 0)
+            CurrentHealth -= amount;
+            if (CurrentHealth < 0)
             {
-                currentHealth = 0;
+                CurrentHealth = 0;
             }
             
             UpdateHealthUi();
@@ -71,7 +66,7 @@ namespace GameLogic
 
         private void UpdateHealthUi()
         {
-            _referencePig.playerHealthText.text = currentHealth.ToString();
+            _referencePig.playerHealthText.text = CurrentHealth.ToString();
         }
 
         private void UpdateBankedHealthUi()
@@ -81,7 +76,7 @@ namespace GameLogic
 
         public bool IsDead()
         {
-            return currentHealth <= 0;
+            return CurrentHealth <= 0;
         }
 
         public IEnumerator ShowDamageHealingText(int amount, bool isDamage)

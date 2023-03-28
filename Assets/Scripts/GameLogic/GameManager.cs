@@ -68,7 +68,15 @@ namespace GameLogic
             {
                 Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
                 player.Heal(player.usedHealthAsMana);
-                referencePig.victoryPanel.SetActive(true);
+                
+                if (CurrentLevel == 4)
+                {
+                    referencePig.gameWinPanel.SetActive(true);
+                }
+                else
+                {
+                    referencePig.victoryPanel.SetActive(true);    
+                }
             }
             else
             {
@@ -84,6 +92,16 @@ namespace GameLogic
         public void OnClickMenu()
         {
             SceneManager.LoadScene(2);
+        }
+
+        public void OnClickCredits()
+        {
+            SceneManager.LoadScene(3);
+        }
+
+        public void OnClickTutorial()
+        {
+            SceneManager.LoadScene(4);
         }
     }
 }

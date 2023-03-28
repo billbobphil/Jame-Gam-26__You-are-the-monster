@@ -92,6 +92,7 @@ MonoBehaviour:
   victoryPanel: {fileID: 0}
   defeatPanel: {fileID: 0}
   errorText: {fileID: 0}
+  levelText: {fileID: 0}
 --- !u!114 &2395246741126665887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +114,10 @@ MonoBehaviour:
   - {fileID: 5088618043492847677, guid: 32db393bdb58cb1498f6713140a6ee85, type: 3}
   opponents:
   - {fileID: 7060236563003008625, guid: 57c7b9052098ef849956b8566f1ba86c, type: 3}
+  - {fileID: 8598587094244670814, guid: e5da91a2314a3ff48b00242f77b4e07b, type: 3}
+  - {fileID: 2988763284786982077, guid: 62df0333151501841afddf1419f05926, type: 3}
+  - {fileID: 2103096135295382961, guid: dfaccbaaaeedbd945b4d16f6da6236d2, type: 3}
+  - {fileID: 2072410709639350465, guid: 1649a4f887079e24cb9db81efb1cabfb, type: 3}
 --- !u!82 &1791847780
 AudioSource:
   m_ObjectHideFlags: 0
