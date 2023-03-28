@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2744595581711521321, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
       propertyPath: basePower
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 845339573077726317, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
       propertyPath: m_RootOrder
@@ -159,9 +159,49 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1865936955074468158, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936477727412373315, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954286048369799541, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_text
+      value: Villager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131778876152913991, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742718585163319322, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3818268923922200151, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
       propertyPath: m_Name
       value: Villager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883977689800582257, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_text
+      value: None
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839409236049767921, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_text
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445984668041930171, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_text
+      value: An average villager, not much of a threat to most.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785686646271576530, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_text
+      value: '-'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124820461765717979, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626bc1253643f734d9f16adddd1ffbed, type: 3}

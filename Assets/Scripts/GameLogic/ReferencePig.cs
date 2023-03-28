@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameLogic
 {
@@ -7,6 +9,10 @@ namespace GameLogic
         public Player player;
         public MatchManager matchManager;
         public RoundManager roundManager;
-        //AI has to go here!
+        public TextMeshProUGUI playerHealthText;
+        public GameObject heartOne;
+        public GameObject heartTwo;
+        public GameObject heartThree;
+        public TextMeshProUGUI cardsRemainingText;
     }
 }

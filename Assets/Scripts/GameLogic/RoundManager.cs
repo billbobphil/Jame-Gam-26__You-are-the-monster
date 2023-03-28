@@ -77,7 +77,7 @@ namespace GameLogic
             {
                 if (_player.handManager.hand.Count == 0 && _aiOpponent.handManager.hand.Count == 0)
                 {
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         _aiOpponent.Wound();
                     }
@@ -259,7 +259,7 @@ namespace GameLogic
             else
             {
                 Debug.Log("AI wins round");
-                _player.TakeDamage(aiPower);
+                _player.TakeDamage(aiPower, true);
             }
         }
     }

@@ -11,14 +11,22 @@ namespace Cards
         
         public delegate void PlayerCardRetracted(PlayerCard card);
         public static event PlayerCardRetracted OnPlayerCardRetracted;
-        
+
+        public Player player;
         private Vector3 _inHandPosition;
         public HandManager hand;
         private bool _isPreSubmitted;
-        private const float DistanceToExtractCard = 7.6f;
+        private const float DistanceToExtractCard = 5.3f;
         private bool _hasBeenTouched;
         public int baseCost;
+        public AudioSource cardChooseAudioSource;
+        public AudioSource cardHoverAudioSource;
 
+        private void Start()
+        {
+            player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        }
+        
         private void OnEnable()
         {
             RoundManager.OnRoundEnd += ResetCard;
@@ -32,7 +40,7 @@ namespace Cards
         public override void Play()
         {
             base.Play();
-            //TODO: remove baseCost from health!
+            player.TakeDamage(baseCost, false);
         }
 
         private void OnMouseEnter()
@@ -44,6 +52,8 @@ namespace Cards
             }
             
             transform.position = new Vector3(_inHandPosition.x, _inHandPosition.y + DistanceToExtractCard, _inHandPosition.z);
+            
+            cardHoverAudioSource.Play();
         }
 
         private void OnMouseExit()
@@ -60,6 +70,8 @@ namespace Cards
 
         private void OnMouseDown()
         {
+            cardChooseAudioSource.Play();
+            
             if (_isPreSubmitted)
             {
                 _isPreSubmitted = false;

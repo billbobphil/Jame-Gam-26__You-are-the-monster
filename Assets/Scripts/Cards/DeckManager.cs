@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Exceptions;
+using GameLogic;
 using UnityEngine;
 
 namespace Cards
@@ -12,9 +13,21 @@ namespace Cards
         private Deck workingDeck;
         public Transform deckLocation;
         public DiscardPile discardPile;
+        private ReferencePig _referencePig;
+        
+        private void Awake()
+        {
+            _referencePig = GameObject.FindWithTag("Overseer").GetComponent<ReferencePig>();
+        }
 
         public Card DrawFromDeck()
         {
+            Player player = GetComponentInParent<Player>();
+            if (player != null)
+            {
+                _referencePig.cardsRemainingText.text = workingDeck.Cards.Count.ToString();
+            }
+            
             return workingDeck.DrawFromDeck();
         }
 
