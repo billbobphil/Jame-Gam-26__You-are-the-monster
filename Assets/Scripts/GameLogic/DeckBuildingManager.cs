@@ -78,7 +78,7 @@ namespace GameLogic
 
         private void TransitionBackToGame()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
     }
 }

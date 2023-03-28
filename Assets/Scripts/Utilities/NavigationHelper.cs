@@ -7,7 +7,7 @@ namespace Utilities
     {
         public void GoToGame()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
 
         public void GoToCredits()
@@ -22,7 +22,7 @@ namespace Utilities
 
         public void GoToMenu()
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(0);
         }
     }
 }
