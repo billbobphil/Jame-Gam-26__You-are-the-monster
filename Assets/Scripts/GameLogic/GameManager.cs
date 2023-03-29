@@ -92,6 +92,7 @@ namespace GameLogic
         public void OnClickMenu()
         {
             SceneManager.LoadScene(0);
+            CurrentLevel = -1;
         }
 
         public void OnClickCredits()

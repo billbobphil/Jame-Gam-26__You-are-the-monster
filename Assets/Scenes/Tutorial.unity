@@ -1193,8 +1193,8 @@ MonoBehaviour:
 
 
     A card''s
-    cost is noted by the number within the red circle, and it''s power is within
-    the blue diamond. A modifier card will add it''s power if the monster type matches.
+    cost is noted by the number within the red circle, and its power is within the
+    blue diamond. A modifier card will add its power if the monster type matches.
 
 
     The
@@ -1211,8 +1211,8 @@ MonoBehaviour:
     the next village.
 
 
-    If the village has more power than you, you will take
-    the full power of the village card as damage.'
+    If the village has the same or more power than you, you
+    will take the full power of the village card as damage.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 965d0550354336e4dbdc4969b900d9ce, type: 2}
   m_sharedMaterial: {fileID: 1262042659069850149, guid: 965d0550354336e4dbdc4969b900d9ce, type: 2}
