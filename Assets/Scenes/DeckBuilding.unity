@@ -577,7 +577,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 13.078522
+  m_PointLightOuterRadius: 16.615286
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -595,7 +595,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185433727}
-  m_LocalRotation: {x: 0, y: 0, z: 0.002166526, w: 0.9999977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.08, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2123,17 +2123,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ecc86bd06ee32f418e5aee3ec609cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPool:
+  modifierCardPool:
+  - {fileID: 2883040105145134845, guid: 7fc1ced08a748b74dac7b2096deab5ee, type: 3}
+  - {fileID: 4771473594339601519, guid: c8b4ea75b1e51de4a8035a1d776441df, type: 3}
+  - {fileID: 2540855186729210298, guid: d6f6d4a373ad17e4a8aea7c2c4ce5b6a, type: 3}
+  - {fileID: 3131164764748888911, guid: 44e08862f3365414489dd25fc43e6267, type: 3}
+  - {fileID: 7630379481964683290, guid: d3d8de3d1977a6244a722b3de7646eab, type: 3}
+  monsterCardPool:
   - {fileID: 7537406156085294032, guid: 8fe69009b8fccb54e8d2ce99a14db171, type: 3}
   - {fileID: 6099555285450641469, guid: a6540155e14aa5c4cb03a2892b5750bd, type: 3}
   - {fileID: 3094294877571717967, guid: a6be4f8c37e93284bb85dbfd2d2351e4, type: 3}
   - {fileID: 3661474368440609225, guid: 3e7f0a071008b454ea26027abc0926fc, type: 3}
   - {fileID: 5088618043492847677, guid: 32db393bdb58cb1498f6713140a6ee85, type: 3}
-  - {fileID: 4771473594339601519, guid: c8b4ea75b1e51de4a8035a1d776441df, type: 3}
-  - {fileID: 2540855186729210298, guid: d6f6d4a373ad17e4a8aea7c2c4ce5b6a, type: 3}
-  - {fileID: 7630379481964683290, guid: d3d8de3d1977a6244a722b3de7646eab, type: 3}
-  - {fileID: 2883040105145134845, guid: 7fc1ced08a748b74dac7b2096deab5ee, type: 3}
-  - {fileID: 3131164764748888911, guid: 44e08862f3365414489dd25fc43e6267, type: 3}
   cardOneLocation: {fileID: 2012874042}
   cardTwoLocation: {fileID: 2004058170}
   cardThreeLocation: {fileID: 1524879501}
@@ -2239,7 +2240,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 13.078522
+  m_PointLightOuterRadius: 16.877317
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -2257,7 +2258,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362237210}
-  m_LocalRotation: {x: 0, y: 0, z: 0.002166526, w: 0.9999977}
+  m_LocalRotation: {x: 0, y: 0, z: 0.0036028277, w: 0.9999935}
   m_LocalPosition: {x: 20.25, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2625,7 +2626,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 13.078522
+  m_PointLightOuterRadius: 17.204426
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -2643,7 +2644,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773339288}
-  m_LocalRotation: {x: 0, y: 0, z: 0.002166526, w: 0.9999977}
+  m_LocalRotation: {x: 0, y: 0, z: 0.0016625348, w: 0.9999986}
   m_LocalPosition: {x: -20.42, y: 0.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

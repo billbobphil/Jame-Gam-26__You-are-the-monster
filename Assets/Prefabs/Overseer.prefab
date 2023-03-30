@@ -93,6 +93,7 @@ MonoBehaviour:
   defeatPanel: {fileID: 0}
   errorText: {fileID: 0}
   levelText: {fileID: 0}
+  gameWinPanel: {fileID: 0}
 --- !u!114 &2395246741126665887
 MonoBehaviour:
   m_ObjectHideFlags: 0

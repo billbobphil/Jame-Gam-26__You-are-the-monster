@@ -10,7 +10,7 @@ namespace Cards
         [SerializeField]
         private List<Card> deckComposition;
         [SerializeField]
-        private Deck workingDeck;
+        public Deck workingDeck;
         public Transform deckLocation;
         public DiscardPile discardPile;
         private ReferencePig _referencePig;
@@ -55,6 +55,11 @@ namespace Cards
         
         public void AddToWorkingDeck(Card card)
         {
+            Player player = GetComponentInParent<Player>();
+            if (player != null)
+            {
+                _referencePig.cardsRemainingText.text = workingDeck.Cards.Count.ToString();
+            }
             workingDeck.AddCard(card);
             ShuffleDeck();
         }

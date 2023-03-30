@@ -11,31 +11,25 @@ namespace Cards
         public Transform handLocation;
         [Range(1,7)]
         public int maxHandSize = 5;
-        [Range(0, 5)]
-        public int startingHandSizeReductionFromMax = 3;
-        private int StartingHandSize => maxHandSize - startingHandSizeReductionFromMax;
 
         public void DrawStartingHand()
         {
-            for(int i = 0; i < StartingHandSize; i++)
-            {
-                DrawCard();
-            }
+            DrawCard();
         }
         
         public void DrawCard()
         {
-            if (hand.Count < maxHandSize)
+            while (hand.Count < maxHandSize)
             {
                 Card drawnCard = deckManager.DrawFromDeck();
-
+                
+                hand.Add(drawnCard);
+                
                 if (drawnCard is PlayerCard)
                 {
                     ((PlayerCard)drawnCard).hand = this;
                 }
-                
-                hand.Add(drawnCard);
-                
+
                 Vector3 handPosition = handLocation.position;
                 
                 for (int i = 0; i < hand.Count; i++)

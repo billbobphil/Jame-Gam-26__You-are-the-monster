@@ -93,6 +93,7 @@ namespace GameLogic
         {
             SceneManager.LoadScene(0);
             CurrentLevel = -1;
+            Player.CurrentHealth = 30;
         }
 
         public void OnClickCredits()
