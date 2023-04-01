@@ -23,12 +23,15 @@ namespace Cards
         public Card DrawFromDeck()
         {
             Player player = GetComponentInParent<Player>();
+
+            Card drawnCard = workingDeck.DrawFromDeck();
+            
             if (player != null)
             {
                 _referencePig.cardsRemainingText.text = workingDeck.Cards.Count.ToString();
             }
-            
-            return workingDeck.DrawFromDeck();
+
+            return drawnCard;
         }
 
         public void ShuffleDeck()

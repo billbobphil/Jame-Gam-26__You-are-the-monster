@@ -27,6 +27,11 @@ namespace GameLogic
                 }
             }
             
+            if (CurrentLevel == 0)
+            {
+                PlayerDeckComposition = startingDeck;
+            }
+            
             CreateDeck();
             referencePig.damageTakenText.text = "";
             referencePig.opponentDamageText.text = "";
@@ -46,7 +51,6 @@ namespace GameLogic
 
         private void Start()
         {
-            //TODO: should probably be moved to a call that happens on some sort of button click?
             Opponent opponent = Instantiate(opponents[CurrentLevel], new Vector3(0, 0, 0), Quaternion.identity);
             referencePig.matchManager.RunMatch(opponent);
         }
